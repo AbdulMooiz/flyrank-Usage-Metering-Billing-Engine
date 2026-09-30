@@ -1,0 +1,16 @@
+project_name: Usage Metering and Billing Engine
+run_command: docker compose up --build -d
+seed_command: docker compose run --rm api python -m app.seed
+test_command: 'docker compose run --rm --volume "$($PWD.Path):/app" api pytest -q'
+base_url: http://localhost:8000
+important_endpoints:
+  - method: GET
+    path: /health
+  - method: POST
+    path: /generate
+  - method: GET
+    path: /usage
+  - method: POST
+    path: /checkout
+  - method: POST
+    path: /webhooks/stripe
